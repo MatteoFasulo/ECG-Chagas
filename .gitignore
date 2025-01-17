@@ -169,3 +169,6 @@ holdout_outputs/
 
 # model folder
 models/
+
+# ignore scores file
+scores.csv
