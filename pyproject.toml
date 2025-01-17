@@ -1,0 +1,15 @@
+[project]
+name = "ECG-Chagas"
+version = "0.1.0"
+description = "Detection of Chagas Disease from the ECG: PhysioNet Challenge 2025"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "h5py==3.12.1",
+    "ipykernel>=6.29.5",
+    "joblib==1.4.2",
+    "numpy==2.0.2",
+    "pandas==2.2.2",
+    "scikit-learn==1.6.0",
+    "wfdb==4.1.2",
+]
