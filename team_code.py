@@ -42,7 +42,7 @@ def train_model(data_folder, model_folder, verbose):
     if verbose:
         print('Extracting features and labels from the data...')
 
-    features = np.zeros((num_records, 6), dtype=np.float64)
+    features = np.zeros((num_records, 28), dtype=np.float64)
     labels = np.zeros(num_records, dtype=bool)
 
     # Iterate over the records.
@@ -68,7 +68,7 @@ def train_model(data_folder, model_folder, verbose):
 
     # Fit the model.
     model = RandomForestClassifier(
-        n_estimators=n_estimators, max_leaf_nodes=max_leaf_nodes, random_state=random_state).fit(features, labels)
+        n_estimators=n_estimators, max_leaf_nodes=max_leaf_nodes, class_weight = "balanced", random_state=random_state).fit(features, labels)
 
     # Create a folder for the model if it does not already exist.
     os.makedirs(model_folder, exist_ok=True)
@@ -129,15 +129,15 @@ def extract_features(record):
 
     num_finite_samples = np.size(np.isfinite(signal))
     if num_finite_samples > 0:
-        signal_mean = np.nanmean(signal)
+        signal_mean = np.nanmean(signal, axis=0)
     else:
-        signal_mean = 0.0
+        signal_mean = np.zeros(12)
     if num_finite_samples > 1:
-        signal_std = np.nanstd(signal)
+        signal_std = np.nanstd(signal, axis=0)
     else:
-        signal_std = 0.0
+        signal_std = np.zeros(12)
 
-    features = np.concatenate(([age], one_hot_encoding_sex, [signal_mean, signal_std]))
+    features = np.concatenate(([age], one_hot_encoding_sex, signal_mean, signal_std), axis=0)
 
     return np.asarray(features, dtype=np.float32)
 
