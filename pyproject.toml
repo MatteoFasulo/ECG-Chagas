@@ -19,4 +19,7 @@ dependencies = [
     "shap==0.46.0",
     "Boruta==0.4.3",
     "keras>=3.8.0",
+    "iprogress>=0.4",
+    "tensorflow[and-cuda]>=2.18.0",
+    "neurokit2>=0.2.10",
 ]
