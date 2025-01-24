@@ -22,4 +22,6 @@ dependencies = [
     "iprogress>=0.4",
     "tensorflow[and-cuda]>=2.18.0",
     "neurokit2>=0.2.10",
+    "pywavelets>=1.8.0",
+    "ts2vg>=1.2.4",
 ]
