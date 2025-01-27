@@ -9,13 +9,18 @@
 #
 ################################################################################
 
+import pandas as pd
 import joblib
 import numpy as np
 import os
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import sys
+import neurokit2 as nk
+import warnings
 
 from helper_code import *
+
+warnings.filterwarnings("ignore")
 
 ################################################################################
 #
@@ -42,7 +47,7 @@ def train_model(data_folder, model_folder, verbose):
     if verbose:
         print('Extracting features and labels from the data...')
 
-    features = np.zeros((num_records, 28), dtype=np.float64)
+    features = np.zeros((num_records, 32), dtype=np.float64)
     labels = np.zeros(num_records, dtype=bool)
 
     # Iterate over the records.
@@ -124,22 +129,88 @@ def extract_features(record):
         one_hot_encoding_sex[2] = 1
 
     signal, fields = load_signals(record)
+    frequency = get_sampling_frequency(header)
 
-    # TO-DO: Update to compute per-lead features. Check lead order and update and use functions for reordering leads as needed.
+    try:
+        ecg_cleaned = nk.ecg_clean(signal[:, 1], sampling_rate=frequency)
+        peaks, info = nk.ecg_peaks(ecg_cleaned, sampling_rate=frequency)
+        waves, waves_signals = nk.ecg_delineate(ecg_cleaned, info, sampling_rate=frequency, method="dwt", check=True, show=False, show_type='all')
+    except:
+        print(f"\nError in record {record}\n")
+        return np.zeros(32, dtype=np.float32)
 
-    num_finite_samples = np.size(np.isfinite(signal))
-    if num_finite_samples > 0:
-        signal_mean = np.nanmean(signal, axis=0)
+    signals = pd.DataFrame({"ECG_Raw": signal[:, 1],
+                            "ECG_Clean": ecg_cleaned})
+    signals = pd.concat([signals, waves], axis=1)
+    info = info
+    info["sampling_rate"] = frequency
+    waves_signals['ECG_R_Peaks'] = info['ECG_R_Peaks']
+
+    correct_waves = check_interval(waves_signals)
+
+    if correct_waves.shape[0] != 0:
+
+        correct_waves[["P_wave_duration","PR_interval","PR_segment","QRS_duration","QT_interval","ST_segment"]] = correct_waves.apply(lambda x: ecg_signal_features(x, frequency), axis=1, result_type='expand')
+
+        correct_waves['ST_slope'] = correct_waves.apply(lambda x: st_slope(signals, int(x['ECG_S_Peaks']), int(x['ECG_T_Onsets'])), axis=1)
+
+        correct_waves = correct_waves.iloc[:, 9:].agg(['mean', 'std', 'min', 'max']).unstack().to_frame().T
+        
+        correct_waves.columns = ['_'.join(col).strip() for col in correct_waves.columns.values]
+
+        correct_waves = correct_waves.fillna(0)
+        
+        features = np.concatenate(([age], one_hot_encoding_sex, correct_waves.values.flatten()), axis=0)
+    
     else:
-        signal_mean = np.zeros(12)
-    if num_finite_samples > 1:
-        signal_std = np.nanstd(signal, axis=0)
-    else:
-        signal_std = np.zeros(12)
-
-    features = np.concatenate(([age], one_hot_encoding_sex, signal_mean, signal_std), axis=0)
+        features = np.zeros(32)
 
     return np.asarray(features, dtype=np.float32)
+
+def check_interval(waves_signals):
+    df_waves = pd.DataFrame(waves_signals)
+    df_waves.drop(columns=['ECG_R_Onsets', 'ECG_R_Offsets'], inplace=True)
+    correct_indices = ['ECG_P_Onsets', 'ECG_P_Peaks', 'ECG_P_Offsets',
+       'ECG_Q_Peaks', 'ECG_R_Peaks', 'ECG_S_Peaks', 'ECG_T_Onsets', 'ECG_T_Peaks', 'ECG_T_Offsets', ]
+    rows = df_waves.shape[0]
+    mask = np.zeros(rows)
+    for i in range(1, rows):
+        start_interval = df_waves.loc[i-1, 'ECG_R_Peaks']
+        end_interval = df_waves.loc[i, 'ECG_R_Peaks']
+        sliced_df = df_waves[df_waves.isin([start_interval, end_interval]).any(axis=1)]
+        # if the sliced df has no missing values, then the interval is correct and the mask should be 1
+        first_condition = sliced_df[correct_indices].isnull().sum().sum() == 0
+        second_condition = correct_indices == sliced_df.iloc[0].sort_values(ascending=True).index.tolist()
+        if first_condition and second_condition:
+            mask[i] = 1
+    return df_waves[mask == 1]
+
+def ecg_signal_features(row, frequency: int = 400):
+    ECG_P_Peaks, ECG_P_Onsets, ECG_P_Offsets, ECG_Q_Peaks, ECG_S_Peaks, ECG_T_Peaks, ECG_T_Onsets, ECG_T_Offsets, ECG_R_Peaks = row
+    # Compute the P wave duration
+    P_wave_duration = (ECG_P_Offsets - ECG_P_Onsets) / frequency
+    # Compute the PR interval
+    PR_interval = (ECG_Q_Peaks - ECG_P_Onsets) / frequency
+    # Compute the PR segment
+    PR_segment = (ECG_Q_Peaks - ECG_P_Offsets) / frequency
+    # Compute the QRS duration
+    QRS_duration = (ECG_S_Peaks - ECG_Q_Peaks) / frequency
+    # Compute the QT interval
+    QT_interval = (ECG_T_Offsets - ECG_Q_Peaks) / frequency
+    # Compute the ST segment
+    ST_segment = (ECG_T_Onsets - ECG_S_Peaks) / frequency
+
+    return {
+        "P_wave_duration": P_wave_duration,
+        "PR_interval": PR_interval,
+        "PR_segment": PR_segment,
+        "QRS_duration": QRS_duration,
+        "QT_interval": QT_interval,
+        "ST_segment": ST_segment
+    }
+
+def st_slope(signal_df, s_peak, t_onset):
+    return (signal_df.iloc[t_onset]['ECG_Clean'] - signal_df.iloc[s_peak]['ECG_Clean']) / (t_onset - s_peak)
 
 # Save your trained model.
 def save_model(model_folder, model):

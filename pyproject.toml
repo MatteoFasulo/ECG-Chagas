@@ -24,4 +24,5 @@ dependencies = [
     "neurokit2>=0.2.10",
     "pywavelets>=1.8.0",
     "ts2vg>=1.2.4",
+    "imbalanced-learn>=0.13.0",
 ]
