@@ -25,4 +25,7 @@ dependencies = [
     "pywavelets>=1.8.0",
     "ts2vg>=1.2.4",
     "imbalanced-learn>=0.13.0",
+    "torch>=2.0.1",
+    "torchvision>=0.15.2",
+    "torchaudio>=2.0.2",
 ]
