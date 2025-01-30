@@ -1,6 +1,6 @@
 # ECG Chagas Detection (PhysioNet Challenge 2025)
 
-From the [`CODE-15% dataset`](https://zenodo.org/records/4916206), we have downloaded the [`exams_part0.zip`](https://zenodo.org/records/4916206/files/exams_part0.zip?download=1) file, the [`exams.csv`](https://zenodo.org/records/4916206/files/exams.csv?download=1) file, and the [`code15_chagas_labels.csv`](https://physionetchallenges.org/2025/data/code15_chagas_labels.zip) label file.
+From the [`CODE-15% dataset`](https://zenodo.org/records/4916206), we have downloaded the [`exams_part0.zip`](https://zenodo.org/records/4916206/files/exams_part0.zip?download=1) file, the [`exams.csv`](https://zenodo.org/records/4916206/files/exams.csv?download=1) file, and the [`code15_chagas_labels.csv`](https://physionetchallenges.org/2025/data/code15_chagas_labels.zip?download=1) label file.
 
 Once downloaded and unzipped, we need to convert the CODE-15% dataset to WFDB format, with the available demographics information and Chagas labels in the WFDB header file, by running
 
