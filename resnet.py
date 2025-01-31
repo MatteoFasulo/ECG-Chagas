@@ -1,5 +1,7 @@
 import argparse
+import os
 from pathlib import Path
+from joblib import Parallel, delayed
 from tqdm import tqdm
 import numpy as np
 import pandas as pd
@@ -9,32 +11,14 @@ from torch.utils.data import Dataset, DataLoader
 
 from helper_code import find_records, get_age, get_sampling_frequency, get_sex, load_header, get_label, load_signals
 
-def get_dataset(records_list: list, data_folder: Path):
-    n_recors = len(records_list)
-
-    features = []
-    labels = []
-    for idx in tqdm(range(20), desc='Loading data'):
-        record_path = (data_folder / records_list[idx]).absolute().__str__()
-        header = load_header(record_path)
-        signals, fields = load_signals(record_path)
-        frequency = get_sampling_frequency(header)
-        label = get_label(header)
-        age = get_age(header)
-        sex = get_sex(header)
-
-        one_hot_encoding_sex = np.zeros(3, dtype=bool)
-        if sex == 'Female':
-            one_hot_encoding_sex[0] = 1
-        elif sex == 'Male':
-            one_hot_encoding_sex[1] = 1
-        else:
-            one_hot_encoding_sex[2] = 1
-        
-        features.append(signals)
-        labels.append(label)
-
-    return features, labels
+def get_features_and_labels(records_id: str, data_folder: Path):
+    record_path = (data_folder / records_id).absolute().__str__()
+    header = load_header(record_path)
+    signals, fields = load_signals(record_path)
+    label = get_label(header)
+    age = get_age(header)
+    sex = get_sex(header)
+    return signals, label, age, sex
 
 class ECGDataset(Dataset):
     def __init__(self, features, labels):
@@ -66,15 +50,24 @@ if __name__ == '__main__':
 
     train_data_folder = Path(args.train_data)
     train_records = find_records(train_data_folder.absolute().__str__())
+
+    df = pd.read_csv('data/signals_features.csv')
+
+    exam_ids = df['exam_id'].values.tolist()
+
+    # Check if the exam_ids in the csv file are in the train_records
+    print(set(exam_ids) == set([int(x) for x in train_records]))
     
-    data = get_dataset(records_list=train_records, data_folder=train_data_folder)
+    #data = Parallel(n_jobs=-1)(delayed(get_features_and_labels)(record_id, train_data_folder) for record_id in tqdm(train_records, desc='Loading signals'))
 
-    X, y = data[0], data[1]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=args.seed)
+    #print(data)
 
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=args.seed)
-
-    train_dataset = ECGDataset(X_train, y_train)
-    train_dloader = DataLoader(train_dataset, batch_size=args.batch, shuffle=True)
-
-    print(train_dloader.dataset[0])
+    #X, y = data[0], data[1]
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=args.seed)
+#
+    #X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=args.seed)
+#
+    #train_dataset = ECGDataset(X_train, y_train)
+    #train_dloader = DataLoader(train_dataset, batch_size=args.batch, shuffle=True)
+#
+    #print(train_dloader.dataset[0])
