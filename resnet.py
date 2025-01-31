@@ -50,17 +50,8 @@ if __name__ == '__main__':
 
     train_data_folder = Path(args.train_data)
     train_records = find_records(train_data_folder.absolute().__str__())
-
-    df = pd.read_csv('data/signals_features.csv')
-
-    exam_ids = df['exam_id'].values.tolist()
-
-    # Check if the exam_ids in the csv file are in the train_records
-    print(set(exam_ids) == set([int(x) for x in train_records]))
     
-    #data = Parallel(n_jobs=-1)(delayed(get_features_and_labels)(record_id, train_data_folder) for record_id in tqdm(train_records, desc='Loading signals'))
-
-    #print(data)
+    data = Parallel(n_jobs=-1)(delayed(get_features_and_labels)(record_id, train_data_folder) for record_id in tqdm(train_records, desc='Loading signals'))
 
     #X, y = data[0], data[1]
     #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=args.seed)
