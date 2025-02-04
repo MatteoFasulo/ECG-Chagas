@@ -281,6 +281,8 @@ torchaudio==2.0.2
     # via ecg-chagas (pyproject.toml)
 torchinfo==1.8.0
     # via ecg-chagas (pyproject.toml)
+torchview==0.2.6
+    # via ecg-chagas (pyproject.toml)
 torchvision==0.15.2
     # via ecg-chagas (pyproject.toml)
 tornado==6.4.2
