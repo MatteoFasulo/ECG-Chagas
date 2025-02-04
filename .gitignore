@@ -172,3 +172,4 @@ models/
 
 # ignore scores file
 scores.csv
+prepare_code15_data.py
