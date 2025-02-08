@@ -9,7 +9,7 @@ dependencies = [
     "ipykernel>=6.29.5",
     "joblib==1.4.2",
     "numpy<2.0",
-    "pandas==2.2.2",
+    "pandas==2.2.3",
     "scikit-learn==1.5.2",
     "seaborn>=0.13.2",
     "graphviz==0.20.3",
@@ -29,4 +29,5 @@ dependencies = [
     "torchinfo>=1.8.0",
     "optuna>=4.2.0",
     "torchview>=0.2.6",
+    "statsmodels>=0.14.4",
 ]

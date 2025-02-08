@@ -124,12 +124,14 @@ numpy==1.26.4
     #   numba
     #   optuna
     #   pandas
+    #   patsy
     #   pywavelets
     #   scikit-learn
     #   scipy
     #   seaborn
     #   shap
     #   soundfile
+    #   statsmodels
     #   torchvision
     #   ts2vg
     #   wfdb
@@ -172,15 +174,19 @@ packaging==24.2
     #   matplotlib
     #   optuna
     #   shap
+    #   statsmodels
 pandas==2.2.2
     # via
     #   ecg-chagas (pyproject.toml)
     #   neurokit2
     #   seaborn
     #   shap
+    #   statsmodels
     #   wfdb
 parso==0.8.4
     # via jedi
+patsy==1.0.1
+    # via statsmodels
 pexpect==4.9.0
     # via ipython
 pillow==11.1.0
@@ -239,6 +245,7 @@ scipy==1.15.1
     #   neurokit2
     #   scikit-learn
     #   shap
+    #   statsmodels
     #   wfdb
     #   xgboost
 seaborn==0.13.2
@@ -267,6 +274,8 @@ sqlalchemy==2.0.37
     #   optuna
 stack-data==0.6.3
     # via ipython
+statsmodels==0.14.4
+    # via ecg-chagas (pyproject.toml)
 sympy==1.13.3
     # via torch
 threadpoolctl==3.5.0
