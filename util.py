@@ -31,7 +31,7 @@ def plot_dataframe(data, labels=None, vmin=-1.96, vmax=1.96,
 
 
 def plot_bars(data, figsize=None, tick_gap=1, series=None, title=None,
-              xlabel=None, ylabel=None, std=None):
+              xlabel=None, ylabel=None, std=None, rotation: int = 45):
     plt.figure(figsize=figsize)
     # x = np.arange(len(data))
     # x = 0.5 + np.arange(len(data))
@@ -44,7 +44,7 @@ def plot_bars(data, figsize=None, tick_gap=1, series=None, title=None,
         # plt.plot(series.index-0.5, series, color='tab:orange')
         plt.plot(series.index, series, color='tab:orange')
     if tick_gap > 0:
-        plt.xticks(x[::tick_gap], data.index[::tick_gap], rotation=45)
+        plt.xticks(x[::tick_gap], data.index[::tick_gap], rotation=rotation)
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
