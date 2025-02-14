@@ -10719,7 +10719,16 @@ XGBoost-Boruta and XGBoost-Intersection results ARE significantly different (p-v
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Why?">Why?<a class="anchor-link" href="#Why?">¶</a></h2>
+<h3 id="Why">Why<a class="anchor-link" href="#Why">¶</a></h3><ul>
+<li><p><strong>Goal:</strong> Improve <strong>ROC AUC</strong> by capturing complex ECG patterns.</p>
+</li>
+<li><p><strong>Model Choices:</strong> <strong>CNNs &amp; RNNs</strong> handle <strong>spatial &amp; temporal dependencies</strong> better than FNNs.</p>
+</li>
+<li><p><strong>Hybrid Approach:</strong> <strong>1D CNNs</strong> extract features, <strong>RNNs</strong> model time dependencies (<strong>SOTA</strong> for ECG tasks).</p>
+</li>
+<li><p><strong>Better Performance:</strong> Despite complexity, deep learning can <strong>outperform traditional ML</strong>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -10730,36 +10739,12 @@ XGBoost-Boruta and XGBoost-Intersection results ARE significantly different (p-v
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Another approach that we can try is to use <strong>Deep Learning</strong> with the aim of improving the results in terms of ROC AUC.</p>
-<p>In this context, we can use any kind of deep learning model, such as a simple <strong>feedforward neural network</strong>, a <strong>convolutional neural network</strong>, or a <strong>recurrent neural network</strong>.</p>
-<p>However, Fully Connected Neural Networks are not suitable for time series data, as they do not take into account the <strong>temporal dependencies</strong> in the data. Moreover, we do not have only one-dimensional data, but <strong>12 leads</strong> of ECG signals for each record and <strong>demographic information</strong>.</p>
-<p>Thus, we can use a Convolutional Neural Network (CNN) to take into account the <strong>spatial dependencies</strong> in the data, as the ECG signals are two-dimensional data. In particular, we can use a <strong>1D CNN</strong> for each lead of the ECG signals and a Fully Connected Neural Network for the demographic information.</p>
-<p>We can also use a Recurrent Neural Network (RNN) to take into account the temporal dependencies in the data, as the ECG signals are time series data. This RNN could be put on top of the CNN to take into account both the spatial and temporal dependencies in the data. This approach is the SOTA for a variety of tasks like <strong>Sleep Stage Classification</strong>, <strong>ECG Classification</strong>, etc.</p>
-<p>Although these models are more complex than the previous ones, they can provide better results in terms of ROC AUC.</p>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Explainability?">Explainability?<a class="anchor-link" href="#Explainability?">¶</a></h2>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Deep Learning models are often considered as black boxes, as they are very complex and it is difficult to understand how they make predictions. However, there are some techniques that can help us understand how the model makes predictions, such as SHAP values, LIME, and Grad-CAM. In particular, SHAP values can help us understand the importance of each feature in the model's predictions.</p>
-<p>We will try to leverage the Deep Explainer of the SHAP library to explain the predictions of the Deep Learning model.</p>
-<p>More sophisticated techniques like LIME and Grad-CAM can also be used to explain the predictions of the Deep Learning model. Grad-CAM can help us understand which parts of the ECG signals are important for the model's predictions as to highlight which leads are more important in the model's predictions. We hypothesize that the lead II is the most important one, as it is the most commonly used lead in ECG analysis but we will see if this is true by using Grad-CAM.</p>
+<h3 id="Explainability">Explainability<a class="anchor-link" href="#Explainability">¶</a></h3><ul>
+<li><strong>Deep Learning = Black Box?</strong> Yes, but <strong>SHAP, LIME, and Grad-CAM</strong> help interpret predictions.</li>
+<li><strong>SHAP Values:</strong> Show <strong>feature importance</strong> in model decisions.</li>
+<li><strong>Grad-CAM:</strong> Highlights <strong>important ECG leads</strong>, testing if <strong>lead II</strong> is most relevant.</li>
+<li><strong>Approach:</strong> Use <strong>SHAP’s Deep Explainer</strong> and explore Grad-CAM for deeper insights.</li>
+</ul>
 </div>
 </div>
 </div>
