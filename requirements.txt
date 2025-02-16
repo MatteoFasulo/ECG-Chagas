@@ -175,7 +175,7 @@ packaging==24.2
     #   optuna
     #   shap
     #   statsmodels
-pandas==2.2.2
+pandas==2.2.3
     # via
     #   ecg-chagas (pyproject.toml)
     #   neurokit2
