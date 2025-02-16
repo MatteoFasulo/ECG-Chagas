@@ -8697,7 +8697,40 @@ F-beta score 0.684931506849315
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Another model that we can try is the KNN. Since the only hyperparameter is the number of neighbors, we can use binary search to find the best number of neighbors. KNN is a simple model that is easy to understand and interpret by just measuring the distance between the points, but usually it does not have performances comparable to more complex models.</p>
+<h2 id="Key-Features">Key Features<a class="anchor-link" href="#Key-Features">¶</a></h2><ul>
+<li><strong>Simple Model:</strong> Measures distance between points for predictions.</li>
+<li><strong>Interpretability:</strong> Easy to understand and explain.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h2><ul>
+<li><strong>Number of Neighbors:</strong><ul>
+<li>Only hyperparameter.</li>
+<li>Optimized using binary search.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Performance">Performance<a class="anchor-link" href="#Performance">¶</a></h2><ul>
+<li><strong>Limitation:</strong> Generally underperforms compared to complex models.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -8755,8 +8788,27 @@ F-beta score 0.6849785407725322
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The second model that we tried is the XGBoost. We used the <code>hist</code> tree method because of its computational efficiency (especially with large datasets) and the <code>total_gain</code> importance type. In particular, the total gain importance is helpful for explainable AI since it takes into account the improvements in performances that a feature contributes across all the splits where it is utilized in the decision trees (thus considering both the frequency and the magnitude of importance of a feature for the final results).</p>
-<p>Also for this model we used the GridSearchCV to find the best hyperparameters in terms of AUC score. The parameters were selected between <code>max_depth</code>, <code>n_estimators</code> and <code>reg_lambda</code>.</p>
+<h2 id="Key-Features">Key Features<a class="anchor-link" href="#Key-Features">¶</a></h2><ul>
+<li><strong>Algorithm:</strong> XGBoost with hist tree method for computational efficiency on large datasets.</li>
+<li><strong>Feature Importance:</strong><ul>
+<li><strong>Total Gain Importance:</strong> Considers both frequency and magnitude of feature contributions across splits.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Benefits">Benefits<a class="anchor-link" href="#Benefits">¶</a></h2><ul>
+<li><strong>Performance:</strong> Efficient and effective for large datasets.</li>
+<li><strong>Explainability:</strong> Enhances interpretability for AI through detailed feature contribution analysis.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -8918,8 +8970,53 @@ F-beta score 0.7011177239076789
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We experimented with the SVC model by using the RBF kernel. The two hyperparameters are the <code>C</code> parameter and the <code>gamma</code> parameter tuned with the help of Optuna.</p>
-<p>Optuna is a hyperparameter optimization framework that allows us to find the best hyperparameters for the SVC model. We used the <code>study.optimize</code> method to find the best hyperparameters maximizing the AUC score. Optuna uses advanced sampling algorithms (such as the TPE sampler) which model the distribution of promising hyperparameters based on past trials to efficiently explore the search space, plus pruning algorithms to early stop unpromising trials.</p>
+<h2 id="Key-Features">Key Features<a class="anchor-link" href="#Key-Features">¶</a></h2><ul>
+<li><strong>Kernel:</strong> RBF kernel, ideal for non-linear data.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h2><ul>
+<li><strong>Parameters:</strong><ul>
+<li><strong>C:</strong> Regularization parameter.<ul>
+<li>Large C → Penalizes misclassifications → Risk of overfitting.</li>
+<li>Small C → Tolerates misclassifications → Risk of underfitting.</li>
+</ul>
+</li>
+<li><strong>Gamma:</strong> Kernel coefficient.<ul>
+<li>Large gamma → Complex decision boundary → Risk of overfitting.</li>
+<li>Small gamma → Simpler decision boundary → Risk of underfitting.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Optimization Framework:</strong> Optuna.<ul>
+<li><strong>Method:</strong> <code>study.optimize</code> to maximize AUC.</li>
+<li><strong>Techniques:</strong> TPE sampler for efficient exploration, pruning for early stopping.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Benefits">Benefits<a class="anchor-link" href="#Benefits">¶</a></h2><ul>
+<li><strong>Performance:</strong> RBF kernel balances flexibility and generalization.</li>
+<li><strong>Efficiency:</strong> Optuna ensures effective hyperparameter search.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -9460,10 +9557,58 @@ F-beta score 0.708171206225681
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The feature importance definition does not highlight the fact that the most important features depend on the dataset used (data dependence). In fact, one common misconception is that the most important features extracted by these methods are the best regardless of the dataset used.</p>
-<p>Thus, we tested permutation importance to see if the results are consistent with the feature importance of the models. Permutation importance is a model-agnostic method that evaluates the importance of each feature by randomly shuffling its values and measuring the impact on the model's performance. In this way, we can assess the relative importance of each feature in predicting the target variable without relying on the model's internal feature importance metrics (which may vary across different models).</p>
-<p>We compute permutation importance on both the training and testing sets to evaluate the consistency of feature importance across different datasets.</p>
-<p>The model used for the permutation importance is the XGBoost model since it has the best performance among the models we have tested.</p>
+<h2 id="Key-Insights">Key Insights<a class="anchor-link" href="#Key-Insights">¶</a></h2><ul>
+<li><strong>Data Dependence:</strong> Feature importance varies with the dataset.<ul>
+<li>Misconception: Important features are universally best regardless of the dataset.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Methodology">Methodology<a class="anchor-link" href="#Methodology">¶</a></h2><ul>
+<li><strong>Definition:</strong> Model-agnostic approach.<ul>
+<li>Randomly shuffle feature values.</li>
+<li>Measure impact on model performance.</li>
+</ul>
+</li>
+<li><strong>Purpose:</strong> Assess feature importance independently of internal model metrics.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Application">Application<a class="anchor-link" href="#Application">¶</a></h2><ul>
+<li><strong>Datasets:</strong> Computed on training and testing sets to check consistency.</li>
+<li><strong>Model:</strong> Used XGBoost due to its superior performance.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Benefits">Benefits<a class="anchor-link" href="#Benefits">¶</a></h2><ul>
+<li><strong>Robust Evaluation:</strong> Validates feature importance across models and datasets.</li>
+<li><strong>Model Independence:</strong> Avoids reliance on specific model-based metrics.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -9537,9 +9682,61 @@ F-beta score 0.708171206225681
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We can use the SHAP values to explain the predictions of the XGBoost model, as it has very good results.</p>
-<p>SHAP values are a good way to explain the predictions of the model. They are a good alternative to the permutation importance and they are more accurate. Their origin comes from the Shapley values in game theory, which are used to explain the contribution of each player to the game. Mathematically, SHAP values assign an importance value to each feature by considering all possible combinations of features and computing the marginal contribution of a feature across these combinations.</p>
-<p>First of all, we define the explainer with a sample of the train set composed by 100 points. Then we compute the SHAP values for the test set. Larger sample sizes would be better, but it would also increase the computational time (which already is quite high around 1h for the XGBoost model).</p>
+<h2 id="Key-Features">Key Features<a class="anchor-link" href="#Key-Features">¶</a></h2><ul>
+<li><strong>Purpose:</strong> Explain predictions of the XGBoost model with high accuracy.</li>
+<li><strong>Origin:</strong> Based on Shapley values from game theory.<ul>
+<li>Assigns importance to features by analyzing their marginal contributions across all feature combinations.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Methodology">Methodology<a class="anchor-link" href="#Methodology">¶</a></h2><ul>
+<li><strong>Explainer Definition:</strong> Created using a sample of 100 training points.</li>
+<li><strong>Computation:</strong> SHAP values calculated for the test set.<ul>
+<li>Larger samples improve accuracy but increase computational time (~1 hour for XGBoost).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Comparison">Comparison<a class="anchor-link" href="#Comparison">¶</a></h2><ul>
+<li><strong>Versus Permutation Importance:</strong><ul>
+<li>SHAP is more accurate.</li>
+<li>Provides detailed insights into individual prediction contributions.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Benefits">Benefits<a class="anchor-link" href="#Benefits">¶</a></h2><ul>
+<li><strong>Explainability:</strong> Highlights the contribution of each feature to model predictions.</li>
+<li><strong>Robustness:</strong> Suitable for high-performing models like XGBoost.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -10813,7 +11010,7 @@ XGBoost-Boruta and XGBoost-Intersection results ARE significantly different (p-v
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Explainability">Explainability<a class="anchor-link" href="#Explainability">¶</a></h3><ul>
-<li><strong>Deep Learning = Black Box?</strong> Yes, but <strong>SHAP, LIME, and Grad-CAM</strong> help interpret predictions.</li>
+<li><strong>Deep Learning = Black Box?</strong> Yes, but <strong>SHAP, and Grad-CAM</strong> help interpret predictions.</li>
 <li><strong>SHAP Values:</strong> Show <strong>feature importance</strong> in model decisions.</li>
 <li><strong>Grad-CAM:</strong> Highlights <strong>important ECG leads</strong>, testing if <strong>lead II</strong> is most relevant.</li>
 <li><strong>Approach:</strong> Use <strong>Grad-CAM</strong> for deeper insights.</li>
@@ -11122,7 +11319,15 @@ F-beta score 0.7497761862130707
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Feature-extraction">Feature extraction<a class="anchor-link" href="#Feature-extraction">¶</a></h3><p>To implement feature extraction, we drew inspiration from the work of Annamalai Natarajan et al. <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a> , which deploys a transformer model to detect cardiac abnormalities from 12-lead ECG recordings. In the architecture presented in that study, a sequential encoder comprising multiple 1D convolutional layers is used to derive features from raw ECG signals. These convolutional layers are specifically designed to capture local temporal patterns by employing filters with varied kernel sizes and strides, thereby extracting essential signal characteristics while simultaneously downsampling the data (by a factor of 20) to mitigate computational complexity. Each convolutional operation is followed by batch normalization and ReLU activations to promote stable training and introduce the requisite non-linearities.</p>
+<h3 id="Why-using-a-Transformer">Why using a Transformer<a class="anchor-link" href="#Why-using-a-Transformer">¶</a></h3><ul>
+<li><strong>Captures Complex ECG Relationships</strong>: Utilizes <strong>self-attention</strong> to model both local and long-range dependencies in ECG data.</li>
+<li><strong>Proven Success in Various Domains</strong>: A robust and scalable framework for developing accurate diagnostic models.</li>
+</ul>
+<p><strong>Starting Point:</strong> Annamalai Natarajan et al. <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a>:</p>
+<ul>
+<li>used a transformer model to detect cardiac abnormalities from 12-lead ECG recordings.</li>
+<li>demonstrated success winning the first place in the <a href="https://moody-challenge.physionet.org/2020/results/">2020 PhysioNet challenge</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -11133,7 +11338,16 @@ F-beta score 0.7497761862130707
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Transformer">Transformer<a class="anchor-link" href="#Transformer">¶</a></h3><p>The transformer leverages a self-attention mechanism that adeptly captures both local and long-range dependencies within sequential data, making it particularly effective for modeling the complex temporal and inter-lead relationships inherent in ECG recordings. Moreover, its capacity for parallel processing significantly enhances computational efficiency, a critical advantage when handling high-dimensional biomedical data. These attributes, along with its demonstrated success in diverse domains, position the transformer as a promising and robust framework for the development of accurate diagnostic models in the context of Chagas disease detection.</p>
+<h3 id="Feature-extraction">Feature extraction<a class="anchor-link" href="#Feature-extraction">¶</a></h3><ul>
+<li>Inspired by Annamalai Natarajan et al <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a> ,</li>
+<li><strong>Sequential Encoder Architecture</strong>:<ul>
+<li>Composed of <strong>multiple 1D convolutional layers</strong> for feature extraction.</li>
+<li>Designed to <strong>capture local temporal patterns</strong> using filters with varied kernel sizes and strides.</li>
+<li><strong>Batch normalization</strong> &amp; <strong>ReLU</strong> activations ensure <strong>stable training and non-linearity</strong> <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a>.</li>
+<li>Downsamples ECG signals by a factor of 20, <strong>reducing computational complexity</strong>.</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -11144,8 +11358,17 @@ F-beta score 0.7497761862130707
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Positional-Encoding">Positional Encoding<a class="anchor-link" href="#Positional-Encoding">¶</a></h3><p>The transformer architecture's self-attention mechanism is inherently order-agnostic, meaning it does not consider the sequential order of the input data. To address this limitation, <strong>we incorporate positional encoding</strong>, which injects information about the order and relative positions of the ECG signal data into the model.</p>
-<p>In the context of 12-lead ECG analysis for Chagas disease detection, positional encoding is crucial because it enables the transformer to capture the temporal dynamics and sequential patterns of the heart's electrical activity.</p>
+<h3 id="Positional-Encoding">Positional Encoding<a class="anchor-link" href="#Positional-Encoding">¶</a></h3><p><strong>Problem:</strong></p>
+<ul>
+<li>The ECG capture the temporal dynamics of the heart's electrical activity</li>
+<li>The transformer does not inherently consider sequence order.</li>
+</ul>
+<p><strong>Solution: Positional Encoding</strong></p>
+<ul>
+<li>Adds order and relative position information to the model.</li>
+<li>Helps capture temporal dynamics in ECG signals.</li>
+<li>Enables the model to recognize sequential patterns in heart activity.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -11355,10 +11578,19 @@ F-beta score 0.7416340066324992
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Transformer-model-with-the-add-of-age-and-sex">Transformer model with the add of age and sex<a class="anchor-link" href="#Transformer-model-with-the-add-of-age-and-sex">¶</a></h2><p>To improve model performance, we incorporated demographic features based on the approach described in <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a>. In that study, the transformer's output was augmented with handcrafted features, with the top 20 most important features selected through an initial random forest analysis of feature importance plus 2 features representing the genre and the age of the patient.</p>
-<p>We initially integrated only the demographic variables (age and sex) into our model due to their relevance in Chagas disease, which exhibits varied prevalence and clinical manifestations across different groups. Age is critical, as cardiac abnormalities tend to develop over time, while sex differences in heart rate variability and ECG patterns further enhance classification. Incorporating these features provides additional context that may improve the model's accuracy in distinguishing between seropositive and seronegative patients.</p>
-<p><strong>Implementation:</strong>
-During the forward pass, the raw ECG data is encoded via a convolutional encoder and processed by a transformer to generate a feature representation. This representation is concatenated with a demographic vector containing age and sex using PyTorch's torch.cat, thereby enriching the feature set. The combined features are then passed through fully connected layers with ReLU and dropout to enhance classification accuracy for Chagas disease detection.</p>
+<h2 id="Transformer-model-with-the-add-of-age-and-sex">Transformer model with the add of age and sex<a class="anchor-link" href="#Transformer-model-with-the-add-of-age-and-sex">¶</a></h2><p><strong>Problem:</strong></p>
+<ul>
+<li>The <strong>ECG dosn't give information about Age and Sex</strong> of a patient<ul>
+<li><strong>Age:</strong> Cardiac abnormalities develop over time</li>
+<li><strong>Sex</strong>: Differences in heart rate variability and ECG patterns enhance classification.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Augment the transformer's output with demographic (age &amp; sex)  features</li>
+<li>Demographic vector is concatenated with the feature representation</li>
+</ul>
 </div>
 </div>
 </div>
@@ -11417,9 +11649,17 @@ F-beta score 0.7602717567130378
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Tranformer-with-top-20-handfeatures-(SHAP)">Tranformer with top 20 handfeatures (SHAP)<a class="anchor-link" href="#Tranformer-with-top-20-handfeatures-(SHAP)">¶</a></h2><p>As a further iteration to enhance performance, we augmented the model by integrating the most significant ECG feature extracted during preprocessing, in line with the approach described in <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a>. For the feature selection we used SHAP instead of the random forest and the used features corresponds to the top predictors previously used in our machine learning models.</p>
-<p>We substituted the feature selection by using the Random Forest feature importance since SHAP (SHapley Additive exPlanations) provides a more interpretable and theoretically grounded approach to feature.</p>
-<p>By combining this key ECG-derived attribute with the transformer-encoded representation, the model gains additional domain-specific insights that capture subtle signal characteristics, thereby potentially improving diagnostic accuracy for Chagas disease detection.</p>
+<h2 id="Tranformer-with-top-20-handfeatures-(SHAP)">Tranformer with top 20 handfeatures (SHAP)<a class="anchor-link" href="#Tranformer-with-top-20-handfeatures-(SHAP)">¶</a></h2><p><strong>Idea:</strong></p>
+<ul>
+<li>Enriches the model’s representation by integrating domain-specific insights that capture subtle signal characteristics.</li>
+<li>Followed the approach from <a href="https://www.cinc.org/archives/2020/pdf/CinC2020-107.pdf">[6]</a></li>
+</ul>
+<p><strong>Feature Augmentation</strong></p>
+<ul>
+<li>Integrate ECG features extracted during preprocessing.</li>
+<li>Combined ECG-derived features with transformer-encoded representations.</li>
+<li>Used SHAP (SHapley Additive exPlanations) instead of Random Forest feature importance.</li>
+</ul>
 </div>
 </div>
 </div>
