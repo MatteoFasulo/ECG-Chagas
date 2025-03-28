@@ -1,0 +1,33 @@
+[project]
+name = "ECG-Chagas"
+version = "0.1.0"
+description = "Detection of Chagas Disease from the ECG: PhysioNet Challenge 2025"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "h5py==3.12.1",
+    "ipykernel>=6.29.5",
+    "joblib==1.4.2",
+    "numpy<2.0",
+    "pandas==2.2.3",
+    "scikit-learn==1.5.2",
+    "seaborn>=0.13.2",
+    "graphviz==0.20.3",
+    "tqdm>=4.67.1",
+    "wfdb==4.1.2",
+    "xgboost==2.1.2",
+    "shap==0.46.0",
+    "Boruta==0.4.3",
+    "keras>=3.8.0",
+    "iprogress>=0.4",
+    "neurokit2>=0.2.10",
+    "pywavelets>=1.8.0",
+    "ts2vg>=1.2.4",
+    "torch>=2.0.1",
+    "torchvision>=0.15.2",
+    "torchaudio>=2.0.2",
+    "torchinfo>=1.8.0",
+    "optuna>=4.2.0",
+    "torchview>=0.2.6",
+    "statsmodels>=0.14.4",
+]
